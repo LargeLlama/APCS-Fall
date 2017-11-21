@@ -1,6 +1,6 @@
 //Wubin Peci
 //APCS Pd. 1
-//HW36 - Lets be rational for a second...
+//HW37 - ok we're not rational enough we gotta crank it up to 11
 //2017-11-20
 
 public class Rational {
@@ -21,8 +21,7 @@ public class Rational {
 			denominator = 1;
 		
 			System.out.println("Invalid denominator inputted! Set default value to 0/1"); //prints error message indicating what has happened
-		}
-		else {
+		} else {
 			numerator = num;		//otherwise, sets them to the values given
 			denominator = denom;		
 		}
@@ -39,7 +38,7 @@ public class Rational {
 	}
 
 	public double floatValue() {
-		return ((double)numerator)/denominator;
+		return (double)numerator/denominator;
 	}
 
 	public void multiply(Rational rationalNum) {
@@ -52,16 +51,19 @@ public class Rational {
 	public void divide(Rational rationalNum) {
 		
 		if ( rationalNum.denominator != 0) {
+
 			this.numerator = this.numerator * rationalNum.denominator;
 			this.denominator = this.denominator * rationalNum.numerator;
-		}
-		else {
+
+		} else {
+
 			System.out.println("Divide by zero error. Computation not carried out");
+
 		}
 		
 	}
 //==========Added 11/20=================
-
+	
 	public static int gcd(int a, int b) {
 		int min = Math.min(a,b);    //establish which one is the bigger and smaller one
 		int max = Math.max(a,b);
@@ -77,39 +79,82 @@ public class Rational {
 	}
 
 
+	//Takes 1 Rational object (just like multiply) and adds it to the current rational number object
+	//Need not reduce
 	public void add ( Rational rational ) {
-		
-		int oldDenom = this.denominator;
 
-		this.numerator = rational.denominator * this.numerator;
-		this.denominator = rational.denominator * this.denominator;
+		if (this.denominator == rational.denominator) {
 
-		int newNumer = rational.numerator * oldDenom;
+			this.numerator = this.numerator + rational.numerator;	//if they have the same denominator, then just subract the numerators
 
-		this.numerator = newNumer + this.numerator;
+		} else {
+
+			int oldDenom = this.denominator;	//store the value of this.denominator in a variable, as this.denominator will be modified
+
+			this.numerator = rational.denominator * this.numerator;	//multiply the numerator by the denominator of the parameter
+			this.denominator = rational.denominator * this.denominator;	//multiply the denominator by the denominator of the parameter
+	
+			int newNumer = rational.numerator * oldDenom;	//multiply the parameter's numerator by the original denominator
+			//this whole proccess above is to make them have the same denominator, so I can just subtract the numerator in the next step
+			
+			this.numerator = newNumer + this.numerator;		
+		}
 		 		
 	}
 
+	//Takes 1 Rational object and subtracts it from the current rational number object
+	//Need not reduce
 	public void subtract( Rational rational ) {
 
-		int oldDenom = this.denominator;
+		if (this.denominator == rational.denominator) {
 
-		this.numerator = rational.denominator * this.numerator;
-		this.denominator = rational.denominator * this.denominator;
+			this.numerator = this.numerator - rational.numerator;
 
-		int newNumer = rational.numerator * oldDenom;
+		} else {
 
-		this.numerator = newNumer - this.numerator;
-	}
+			int oldDenom = this.denominator;
 
+			this.numerator = rational.denominator * this.numerator;
+			this.denominator = rational.denominator * this.denominator;
 	
+			int newNumer = rational.numerator * oldDenom;
 
+			this.numerator = this.numerator - newNumer;
+		}
+	}
+	//uses exact same logic as the add() method, but subtracts the newNumer from this.numerator instead of adding :)
 
 	public void reduce() {
-		int factor = gcd(numerator, denominator);
+
+		int factor = gcd(numerator, denominator);	//the factor to divide by is the gcd of the numerator and the denominator
 
 		numerator = numerator / factor;
 		denominator = denominator / factor;
+
+	}
+
+	public int compareTo ( Rational rational ) {
+
+		this.subtract(rational);	//subtract the two rational numbers
+		
+		//checks if the testNum variable is negative or not, and returns the appropriate int
+		if (this.numerator == 0) { 		//if it is = 0, then the numbers must be the same
+
+			this.add(rational);			//adds the parameter so the value of the ration doesn't change
+			return 0;
+
+		} else if (this.numerator > 0) { //if it is greater than zero, then the parameter must be less than the original
+		
+			 this.add(rational);			//adds the parameter so the value of the ration doesn't change
+			 return 1;
+
+		} else {		//the final case, the paramter is greater than the original
+			 
+			 this.add(rational);			//adds the parameter so the value of the ration doesn't change
+			 return -1;
+
+		}
+
 	}
 
 	public static void main(String[] args) {	//need main method to test functions!
@@ -152,6 +197,23 @@ public class Rational {
 	Rational t = new Rational(1,3);
 	s.add(t);
 	System.out.println("s + 1/3 = " + s);
+
+	Rational n = new Rational(1,5);
+	s.subtract(n);
+	System.out.println("s - 1/5 = " + s);
+
+
+	System.out.println("\n===========KEY===========\n1 - greater than\n0 - equal to\n-1 - less than\n");
+	System.out.println("s = " + s + "\n");
+
+	Rational x = new Rational(19,30);
+	System.out.println("is s = 19 / 30?\n" + s.compareTo(x) + "\n");
+
+	x = new Rational(18,30);
+	System.out.println("is s > 18 / 30?\n" + s.compareTo(x) + "\n");
+
+	x = new Rational(20,30);
+	System.out.println("is s > 20/30?\n" + s.compareTo(x) + "\n");
 
 	}
 }

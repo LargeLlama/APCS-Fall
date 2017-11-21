@@ -64,21 +64,15 @@ public class Rational {
 	}
 //==========Added 11/20=================
 	
-	public static int gcd(int a, int b) {
-		int min = Math.min(a,b);    //establish which one is the bigger and smaller one
-		int max = Math.max(a,b);
 
-		if (max % min == 0)   //Check their divisibility
-			return min;
-		else
-			max -= min;          //subtract the smaller from the larger
-			if (max == 0)
-				return min;      // if it's equal to zero return the smaller
-			else
-				return gcd(min, max);     //otherwise run thru the same fucntion again with the new numbers
+	public static int gcd ( int a, int b){ // Does a recursive algorithm of GCD
+
+        if (a % b == 0) 
+			return b;
+        
+		return gcd( b, a % b);
+
 	}
-
-
 	//Takes 1 Rational object (just like multiply) and adds it to the current rational number object
 	//Need not reduce
 	public void add ( Rational rational ) {

@@ -92,10 +92,10 @@ public class Swapper {
 		System.out.println("Let's make a 2-D array!");
 		
 		System.out.print("Rows: ");
-		int rows = keyboard.readInt();
+		int rows = Keyboard.readInt();
 		//user inputs # of rows
 		System.out.print("Columns: ");
-		int columns = keyboard.readInt();
+		int columns = Keyboard.readInt();
 		//user inputs # of columns
 		
 		String[][] stringArray = new String[rows][columns];

@@ -24,7 +24,8 @@ public class Swapper {
 	private static final String ANSI_PURPLE = "\u001B[35m";
 	private static final String ANSI_CYAN = "\u001B[36m";
 	private static final String ANSI_WHITE = "\u001B[37m";
-
+	//Above are constants for changing text color in terminal
+	
 	public void printArray(String[][] array) { 		//simple print array method - uses FOREACH to print each element with a space between
 
 		int rows = 0;				//numbers the rows
@@ -33,6 +34,7 @@ public class Swapper {
 		for (int i = 0; i < array[0].length; i++) {
 			System.out.print("\t" + ANSI_GREEN + i + ANSI_RESET);
 		}
+
 		System.out.println();
 
 		for (String[] a : array) {
@@ -109,7 +111,8 @@ public class Swapper {
 		System.out.print("Row: "); 
 		test[0] = Keyboard.readInt();
 		//the row of the first string stored as the first element
-		while (test[0] > (array.length) || test[0] < 0) {
+		while (test[0] > (array.length) || test[0] < 0) {			
+		//makes sure what they input is in the range of the array, other wise forces them to keep entering until a valid input is receieved
 
 			System.out.println("Number out of range, try again!");
 			test[0] = Keyboard.readInt();
@@ -169,37 +172,40 @@ public class Swapper {
 		String[][] stringArray = new String[rows][columns];
 		swapper.populateArray(stringArray);
 		//initialize new array with the rows and columns given, and then populate it with random strings
-		//
-		while (true) {
+		
+		while (true) {	//runs until loop is broken
 
-			swapper.printArray(stringArray);
+			swapper.printArray(stringArray);					//prints array that was generated
 			
-			int[] positions = swapper.position(stringArray);
+			int[] positions = swapper.position(stringArray);	//gets user input for the positions
 
-			stringArray = swapper.swap(positions, stringArray);
+			stringArray = swapper.swap(positions, stringArray);	//swaps the strings at given positions, and prints them
 			//swap the values accordingly
 			
 			System.out.println("What else would you like to do?");
 			System.out.println("1: Swap the same array");
 			System.out.println("2: Generate a new array");
 			System.out.println("3: Exit");
+			//give user options to do more 
 
 			int choice = Keyboard.readInt();
+			//store their choice in a variable, and makes sure what they inputted is valid 
+
 			while (choice < 0 || choice > 3) {
 				System.out.println("Invalid input! Try again!");
 				choice = Keyboard.readInt();
 			}
 
 			if (choice == 1) {
-				System.out.println("Here we go again!");
+				System.out.println("Here we go again!");	//restarts loop, keeping he same String[][]
 			} else if (choice == 2) {
-				main(args);
+				main(args);									//starts the main function from the beginning
 			} else if (choice == 3) {
-				break;
+				break;										//breaks from the loop
 			}
 		}
 		
-		System.out.println("Have a good day!");
+		System.out.println("Have a good day!"); 			//goodbye message
 
 	}
 

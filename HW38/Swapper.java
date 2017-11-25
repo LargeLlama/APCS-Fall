@@ -16,13 +16,20 @@ public class Swapper {
 	private final String ALPHABET = "abcdefghijklmnopqrstuvwxyz"; //constant for making random strings
 
 	public void printArray(String[][] array) { 		//simple print array method - uses FOREACH to print each element with a space between
-		
+
+		int rows = 0;				//numbers the rows
 		System.out.println();		
 
-		for (String[] a : array) {
+		for (int i = 0; i < array[0].length; i++) {
+			System.out.print("\t" + i);
+		}
+		System.out.println();
 
+		for (String[] a : array) {
+			System.out.print(rows);
+			rows ++;
 			for (String s : a) {
-				System.out.print(s + "\t");
+				System.out.print("\t" + s);
 			}
 	
 			System.out.println();		//inserts a new line between rows

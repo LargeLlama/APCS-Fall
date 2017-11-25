@@ -14,34 +14,15 @@ import cs1.Keyboard;
 public class Swapper {
 	
 	private final String ALPHABET = "abcdefghijklmnopqrstuvwxyz"; //constant for making random strings
-	
-	private static final String ANSI_RESET = "\u001B[0m";
-	private static final String ANSI_BLACK = "\u001B[30m";
-	private static final String ANSI_RED = "\u001B[31m";
-	private static final String ANSI_GREEN = "\u001B[32m";
-	private static final String ANSI_YELLOW = "\u001B[33m";
-	private static final String ANSI_BLUE = "\u001B[34m";
-	private static final String ANSI_PURPLE = "\u001B[35m";
-	private static final String ANSI_CYAN = "\u001B[36m";
-	private static final String ANSI_WHITE = "\u001B[37m";
-	//Above are constants for changing text color in terminal
-	
-	public void printArray(String[][] array) { 		//simple print array method - uses FOREACH to print each element with a space between
 
-		int rows = 0;				//numbers the rows
+	public void printArray(String[][] array) { 		//simple print array method - uses FOREACH to print each element with a space between
+		
 		System.out.println();		
 
-		for (int i = 0; i < array[0].length; i++) {
-			System.out.print("\t" + ANSI_GREEN + i + ANSI_RESET);
-		}
-
-		System.out.println();
-
 		for (String[] a : array) {
-			System.out.print(ANSI_GREEN + rows + ANSI_RESET);
-			rows ++;
+
 			for (String s : a) {
-				System.out.print("\t" + s);
+				System.out.print(s + "\t");
 			}
 	
 			System.out.println();		//inserts a new line between rows
@@ -70,7 +51,7 @@ public class Swapper {
 		}
 	}
 
-	public String[][] swap(int[] positions, String[][] array) {
+	public void swap(int[] positions, String[][] array) {
 
 		int rows = array.length;	//rows = length of array of arrays
 		int columns = array[0].length;	//columns = length of arrays inside the array
@@ -87,10 +68,10 @@ public class Swapper {
 			for (int n = 0; n < array[i].length; n++) {			//loop thru, checking if the positions match and if so
 																//switching them
 				if (i == positions[0] && n == positions[1] ) {
-					newArray[i][n] = ANSI_RED + secondSwap + ANSI_RESET;		//red text allow to user to see which values have been changed
+					newArray[i][n] = "*" + secondSwap + "*";		//asterisks allow to user to see which values have been changed
 
 				} else if (i == positions[2] && n == positions[3]) {
-					newArray[i][n] = ANSI_RED + firstSwap + ANSI_RESET;
+					newArray[i][n] = "*" + firstSwap + "*";
 
 				} else {
 					newArray[i][n] = array[i][n];
@@ -99,69 +80,17 @@ public class Swapper {
 		}
 
 		printArray(newArray);	//printing the array at the end
-		return newArray;
-	}
-
-	public int[] position(String[][] array) {
-
-		System.out.println("Indicate the positions you would like swapped (note: this is using a ZERO based index!)");
-		int[] test = new int[4]; 
-		//prepare the array to store the positions
-
-		System.out.print("Row: "); 
-		test[0] = Keyboard.readInt();
-		//the row of the first string stored as the first element
-		while (test[0] > (array.length) || test[0] < 0) {			
-		//makes sure what they input is in the range of the array, other wise forces them to keep entering until a valid input is receieved
-
-			System.out.println("Number out of range, try again!");
-			test[0] = Keyboard.readInt();
-
-		}
-
-		System.out.print("\nColumn: ");
-		test[1] = Keyboard.readInt();
-		//the column of the first string stored as the second element
-		while (test[1] > (array[0].length) || test[1] < 0) {
-
-			System.out.println("Number out of range, try again!");
-			test[1] = Keyboard.readInt();
-
-		}
-
-		System.out.print("\nRow: ");
-		test[2] = Keyboard.readInt();
-		//the row of the second string stored as the third element
-		while (test[2] > (array.length) || test[2] < 0) {
-
-			System.out.println("Number out of range, try again!");
-			test[2] = Keyboard.readInt();
-
-		}
-
-		System.out.print("\nColumn: ");
-		test[3] = Keyboard.readInt();
-		//the column of the second string stored as the third element
-		while (test[3] > (array[0].length) || test[3] < 0) {
-
-			System.out.println("Number out of range, try again!");
-			test[3] = Keyboard.readInt();
-
-		}
-
-
-		return test;
-
 
 	}
 
 	public static void main(String[] args) {
-	
-		Swapper swapper = new Swapper();
+		
+		Swapper swap = new Swapper();
+		Keyboard keyboard = new Keyboard();
 		//make new instances of the classes necessary
 		
 		System.out.println("Let's make a 2-D array!");
-	
+		
 		System.out.print("Rows: ");
 		int rows = Keyboard.readInt();
 		//user inputs # of rows
@@ -170,42 +99,33 @@ public class Swapper {
 		//user inputs # of columns
 		
 		String[][] stringArray = new String[rows][columns];
-		swapper.populateArray(stringArray);
+		swap.populateArray(stringArray);
 		//initialize new array with the rows and columns given, and then populate it with random strings
-		
-		while (true) {	//runs until loop is broken
 
-			swapper.printArray(stringArray);					//prints array that was generated
-			
-			int[] positions = swapper.position(stringArray);	//gets user input for the positions
+		swap.printArray(stringArray);
 
-			stringArray = swapper.swap(positions, stringArray);	//swaps the strings at given positions, and prints them
-			//swap the values accordingly
-			
-			System.out.println("What else would you like to do?");
-			System.out.println("1: Swap the same array");
-			System.out.println("2: Generate a new array");
-			System.out.println("3: Exit");
-			//give user options to do more 
+		System.out.println("Indicate the positions you would like swapped (note: this is using a ZERO based index!)");
+		int[] test = new int[4]; 
+		//prepare the array to store the positions
 
-			int choice = Keyboard.readInt();
-			//store their choice in a variable, and makes sure what they inputted is valid 
+		System.out.print("Row: "); 
+		test[0] = keyboard.readInt();
+		//the row of the first string stored as the first element
 
-			while (choice < 0 || choice > 3) {
-				System.out.println("Invalid input! Try again!");
-				choice = Keyboard.readInt();
-			}
+		System.out.print("\nColumn: ");
+		test[1] = keyboard.readInt();
+		//the column of the first string stored as the second element
 
-			if (choice == 1) {
-				System.out.println("Here we go again!");	//restarts loop, keeping he same String[][]
-			} else if (choice == 2) {
-				main(args);									//starts the main function from the beginning
-			} else if (choice == 3) {
-				break;										//breaks from the loop
-			}
-		}
-		
-		System.out.println("Have a good day!"); 			//goodbye message
+		System.out.print("\nRow: ");
+		test[2] = keyboard.readInt();
+		//the row of the second string stored as the third element
+
+		System.out.print("\nColumn: ");
+		test[3] = keyboard.readInt();
+		//the column of the second string stored as the third element
+
+		swap.swap(test, stringArray);
+		//swap the values accordingly
 
 	}
 

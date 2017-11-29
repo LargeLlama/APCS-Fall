@@ -1,4 +1,6 @@
 //Wubin Peci
+//(with a special guest appearance by Raymond Wu, my neighbor and partner!)
+//tap tap tomato
 //APCS Pd. 1
 //HW42 PHASE II =======INITIALIZED
 //2017-28-11
@@ -50,8 +52,9 @@ public class SuperArray
   private void expand()
   {
     int[] temp = new int[ _data.length * 2 ];
-    for( int i = 0; i < _data.length; i++ )
+    for( int i = 0; i < _data.length; i++ ){
       temp[i] = _data[i];
+	}
     _data = temp;
   }
 
@@ -67,54 +70,65 @@ public class SuperArray
   //           return old value at index
   public int set( int index, int newVal )
   {
-    int temp = _data[index];
-    _data[index] = newVal;
-    return temp;
+	if (index == _size) {
+		_size = _size + 1;
+	}
+
+	int temp = _data[index];
+	_data[index] = newVal;
+	return temp;
   }
 
 
   //adds an item after the last item
   public void add( int newVal )
   {
-	_size = _size + 1;
-	int[] temp = new int[_size];
-
-	for (int i = 0; i < _size - 1; i++) {
-		temp[i] = _data[i];
+	if (_size == _data.length) {
+		expand();
 	}
 
-	temp[_size - 1] = newVal;
-	
-	_data = temp;
+	_data[_size] = newVal;
+
+	_size = _size + 1;
+
   }
 
 
   //inserts an item at index
   public void add( int index, int newVal )
   {
-	_size = _size + 1;
-
-	int[] temp = new int[_size];
-
-	for (int i = 0; i < index; i++) {
-		temp[i] = _data[i];
+	if (index > _data.length) {
+		expand();
 	}
-	temp[index] = newVal;
-
-	for(int i = index; i < _size - 1; i++) {
-		temp[i] = _data[i];
+	if (index > _size) {
+		_size = index;
+	}
+	else {
+		_size += 1;
 	}
 	
-	_data = temp;
+	for (int i = _size; i > index; i--) {
+		_data[i] = _data[i-1];
 
+	}
+
+	_data[index] = newVal;
+	
   }
+
 
 
   //removes the item at index
   //shifts elements left to fill in newly-empted slot
   public void remove( int index )
   {
-    /* YOUR IMPLEMENTATION HERE */
+	  _size = _size - 1;
+
+	  for (int i = index; i < _data.length -1 ; i++) {
+		  _data[i] = _data[i + 1];
+	  }
+
+
   }
 
 
@@ -160,7 +174,6 @@ public class SuperArray
 
     System.out.println("Printing populated SuperArray mayfield...");
     System.out.println(mayfield);
- /*~~~~~~~~move~me~down~~~~~~~~~~~~~~v~~~~~~~~
 
     mayfield.remove(3);
     System.out.println("Printing SuperArray mayfield post-remove...");
@@ -168,7 +181,6 @@ public class SuperArray
     mayfield.remove(3);
     System.out.println("Printing SuperArray mayfield post-remove...");
     System.out.println(mayfield);
-      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|~~~~~~~~*/
    
     mayfield.add(3,99);
     System.out.println("Printing SuperArray mayfield post-insert...");

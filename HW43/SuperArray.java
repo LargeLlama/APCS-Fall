@@ -152,6 +152,15 @@ public class SuperArray implements ListInt
     mayfield.add(1,77);
     System.out.println("Printing SuperArray mayfield post-insert...");
     System.out.println(mayfield);
+	
+	//TESTING ListInt METHODS
+
+	System.out.println("\n" + mayfield.add(10)); //pritns out "true"
+	System.out.println(mayfield.get(0)); //first element (5)
+	System.out.println(mayfield.set(0, 55)); //prints out 5 and replaces it with 55
+	System.out.println(mayfield);
+	System.out.println(mayfield.remove(0)); //removes 55 (1st element)
+	System.out.println(mayfield);
 
   }//end main()
 

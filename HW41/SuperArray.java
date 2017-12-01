@@ -13,14 +13,14 @@ public class SuperArray
 {
 
   private int[] _data;  //underlying container
-  private int _size;    //number of elements in this SuperArray
+  private int _size;    //number of MEANINGFUL elements in this SuperArray
 
 
   //default constructor – initializes 10-item array
   public SuperArray()
   {
 	_data = new int[10];   //new array of 10 elements
-	_size = 10;		// sets the size to 10
+	_size = 0;		// sets the size to 10
   }
 
 
@@ -29,11 +29,13 @@ public class SuperArray
   {
 	String retString  = "[";	//inits the retStr and makes it have the opening bracket of an array
 
-	for (int n : _data) {
-		retString += n + ", ";	//puts each element with a comma in between
+	for (int i = 0; i < _size; i++) {
+		retString += i + ", ";	//puts each element with a comma in between
 	}
+	
+	if (retString.length() > 1)
+		retString = retString.substring(0, retString.length() - 2); //cuts the last 2 elements because they are just extra commas
 
-	retString = retString.substring(0, retString.length() - 2); //cuts the last 2 elements because they are just extra commas
 	retString += "]";	//adds the closing brace
 
 	return retString;	//returns the return string
@@ -69,6 +71,7 @@ public class SuperArray
 	int oldVal = _data[index];	//saves the old value in a variable
 	
 	_data[index] = newVal;		//replaces the old value in the arrya with the new one
+
 
 	return oldVal;    	//returns the oldValue character
   }

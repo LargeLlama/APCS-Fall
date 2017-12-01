@@ -155,11 +155,15 @@ public class Rational implements Comparable
     //...thus allowing for direct comparison of attributes
     reduce();
 
-	Rational r = (Rational) other;	//typecast necessary
+	if (other instanceof Rational) {
 
-	return this._numerator == r._numerator && this._denominator == r._denominator;	//once reduced, we can simply compare the numerator and denominator
+		Rational r = (Rational) other;	//typecast necessary
+		return this._numerator == r._numerator && this._denominator == r._denominator;	//once reduced, we can simply compare the numerator and denominator
 
-  
+	}
+	
+	return false;
+
   }//end equals()
 
 

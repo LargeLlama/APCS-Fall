@@ -174,7 +174,9 @@ public class Rational implements Comparable
   public int compareTo( Object other )
   {
 	  if (!(other instanceof Rational)) {		
+
 		throw new ClassCastException("beep beep you broke dis");	//if it is not a rational object, throw this exception
+
 	  } else {
 			
 			Rational r = (Rational) other;	//typecast to have access to the subtract method
@@ -278,14 +280,12 @@ public class Rational implements Comparable
 	  System.out.println( "r > r: " +  r.compareTo(r) );
 
       //uncommenting the line below should trigger a runtime error
-//       System.out.println( "s > y: " +  s.compareTo(y) );
+      //System.out.println( "s > y: " +  s.compareTo(y) );
     
       System.out.println( "v.equals(v): " + v.equals(v) );
       System.out.println( "v.equals(w): " + v.equals(w) );
       System.out.println( "w.equals(x): " + w.equals(x) );
-/*~~~v~~~~~~~~~~down~goer~3~~~~~~~~~~~~~v~~~~~
 
-      ~~~~~|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|~~~~~*/
   }
 
 }//end class

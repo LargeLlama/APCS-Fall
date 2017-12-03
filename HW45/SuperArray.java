@@ -1,7 +1,7 @@
-// Clyde "Thluffy" Sinclair
-// APCS1 pd0
+// WOOOOOobin Peco
+// APCS1 pd1
 // HW43 -- adhering to a published standard (implementing an interface)
-// 2017-11-30r
+// 2017-12-03
 
 /***************************
  * class SuperArray version 3.0
@@ -14,7 +14,7 @@
  * removing an element at specified index
  *
  * ...and now SuperArray complies with the specifications of the
- * ListInt interface. (ListInt.java must be in same dir as this file)
+ * List interface. (List.java must be in same dir as this file)
  ***************************/
 
 public class SuperArray implements List
@@ -36,11 +36,11 @@ public class SuperArray implements List
   {
     String foo = "[";
     for( int i = 0; i < _size; i++ ) {
-      foo += _data[i] + ",";
+      foo += _data[i] + ", ";
     }
     if ( foo.length() > 1 )
       //shave off trailing comma
-      foo = foo.substring( 0, foo.length()-1 );
+      foo = foo.substring( 0, foo.length()- 2);
     foo += "]";
     return foo;
   }
@@ -95,12 +95,18 @@ public class SuperArray implements List
   //inserts an item at index
   public void add( int index, Object o )
   {
-    //first expand if necessary
+	    //first expand if necessary
     if ( _size >= _data.length )
       expand();
+   
+	if (index < 0 || index > _size)
+		throw new IndexOutOfBoundsException("Invalid index!");
+
+
     for( int i = _size; i > index; i-- ) {
       _data[i] = _data[i-1]; //each slot gets value of left neighbor
     }
+
     _data[index] = o;
     _size++;
   }
@@ -111,12 +117,15 @@ public class SuperArray implements List
   //returns removed value
   public Object remove( int index )
   {
-    Object retInt = _data[index];
+	if (index < 0 || index >= _size) 
+		throw new IndexOutOfBoundsException("Invalid Index!");
+
+    Object ret = _data[index];
     for( int i = index; i < _size - 1; i++ ) {
       _data[i] = _data[i+1];
     }
     _size--;
-    return retInt;
+    return ret;
   }
 
 
@@ -135,8 +144,10 @@ public class SuperArray implements List
     System.out.println("Printing empty SuperArray mayfield...");
     System.out.println(mayfield);
 
-    mayfield.add(5);
-    mayfield.add(4);
+	String meme= new String("meme");
+
+    mayfield.add(meme);
+    mayfield.add("test");
     mayfield.add(3);
     mayfield.add(2);
     mayfield.add(1);
@@ -160,9 +171,23 @@ public class SuperArray implements List
     mayfield.add(1,77);
     System.out.println("Printing SuperArray mayfield post-insert...");
     System.out.println(mayfield);
-    /*~~~~~~~~move~me~down~~~~~~~~~~~~~~V~~~~~~~~
-      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|~~~~~~~~*/
-  }//end main()
+
+	mayfield.set(0, mayfield.get(0) + " meme");
+	System.out.println(mayfield);
+
+	//Exception testing - uncomment each line to get specified exception
+	
+//	mayfield.set(-1, "this will cause an error you dingus"); //IndexOutOfBoundsException
+//	mayfield.add(10, "this will also cause an error"); //IndexOutOfBoundsException
+	
+//	Integer thisWillCauseAnError = new Integer(20);
+//	mayfield.add(20, thisWillCauseAnError); //IndexOutOfBoundsException
+
+//	mayfield.get(10); //IndexOutOfBoundsException
+
+//	mayfield.remove(6);
+		
+   }//end main()
 
 
 }//end class

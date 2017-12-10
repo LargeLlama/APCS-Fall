@@ -115,7 +115,7 @@ public class OrderedArrayList
     OrderedArrayList Franz = new OrderedArrayList();
     // testing linear search
     for( int i = 0; i < 15; i++ )
-    	Franz.addBin( (int)( 50 * Math.random() ));
+    	Franz.addBin( (int)(Math.random() * 49) + 1);
 	System.out.println(Franz.size());
 
 

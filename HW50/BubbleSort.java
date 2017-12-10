@@ -80,8 +80,9 @@ public class BubbleSort {
   public static ArrayList<Comparable> bubbleSort( ArrayList<Comparable> input )
   {
 	  ArrayList<Comparable> data = new ArrayList<Comparable>();
-	  data = input;
-
+	  for (int i = 0; i < input.size(); i++) {
+		  data.add(input.get(i));
+	  }
  	  int currentElement = data.size() - 1;	//currentElement is last element of arraylist
 	  int neighboringElement = data.size() - 2;	//neighboringElement is element next to last
 	  int passCount = 0;	//0 passes done to begin with
@@ -154,8 +155,7 @@ public class BubbleSort {
       System.out.println( "sorted version of ArrayList bobo:\n" 
       + boboSorted + "\n");
       System.out.println( "ArrayList bobo after sorting:\n" + bobo + "\n");
-      System.out.println( bobo );
-
+      
   }//end main
 
 }//end class BubbleSort

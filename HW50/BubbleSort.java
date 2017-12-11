@@ -1,3 +1,9 @@
+//WOOOOOOOOOObin Peco
+//APCS pd1
+//HW50 bubble butt
+//2017-12-08
+//yeahh
+
 /******************************
  * class BubbleSort -- implements bubblesort algorithm (vanilla)
  ******************************/
@@ -39,14 +45,30 @@ public class BubbleSort {
   // postcondition: data's elements sorted in ascending order
   public static void bubbleSortV( ArrayList<Comparable> data )
   {
-	boolean sorted = false;
-	int currentElement = data.size() - 1;
-	int neighboringElement = data.size() - 2;
-	Comparable temp = null;
-	while (!sorted) {
-		if (data.get(currentElement).compareTo(data.get(neighboringElement)) < 0) {
-			temp = data.get(currentElement);
-		}					
+	int currentElement = data.size() - 1;	//currentElement is last element of arraylist
+	int neighboringElement = data.size() - 2;	//neighboringElement is element next to last
+	int passCount = 0;	//0 passes done to begin with
+	int maxPasses = currentElement;	//maxPasses is equal to size - 1, which also is value of currentElement
+
+	Comparable temp = null;	//temp variable to store value before swap
+	
+	while (passCount < maxPasses) {
+
+		if (data.get(currentElement).compareTo(data.get(neighboringElement)) < 0) {	//if the currentElement is less than its neighbor, we swap them
+			temp = data.get(currentElement);			
+			data.set(currentElement, data.get(neighboringElement));
+			data.set(neighboringElement, temp);
+		}
+
+		if ( neighboringElement > 0) {		//if we are not at the first element
+			currentElement -= 1;			//subtract each index counter by one
+			neighboringElement -= 1;
+		}else {	//otherwise, we have looped thru the entire array once
+			passCount += 1;		//add one to count
+			currentElement = data.size() - 1;	//set index counters to original value so we can loop thru again
+			neighboringElement = data.size() - 2;
+		}
+
 	} 
 
   }
@@ -57,52 +79,83 @@ public class BubbleSort {
   //                Returns sorted copy of input ArrayList.
   public static ArrayList<Comparable> bubbleSort( ArrayList<Comparable> input )
   {
-    /* YOUR IMPLEMENTATION HERE */
+	  ArrayList<Comparable> data = new ArrayList<Comparable>();
+	  for (int i = 0; i < input.size(); i++) {
+		  data.add(input.get(i));
+	  }
+ 	  int currentElement = data.size() - 1;	//currentElement is last element of arraylist
+	  int neighboringElement = data.size() - 2;	//neighboringElement is element next to last
+	  int passCount = 0;	//0 passes done to begin with
+	  int maxPasses = currentElement;	//maxPasses is equal to size - 1, which also is value of currentElement
+
+	  Comparable temp = null;	//temp variable to store value before swap
+	
+	  while (passCount < maxPasses) {
+
+	  	if (data.get(currentElement).compareTo(data.get(neighboringElement)) < 0) {	//if the currentElement is less than its neighbor, we swap them
+			temp = data.get(currentElement);			
+			data.set(currentElement, data.get(neighboringElement));
+			data.set(neighboringElement, temp);
+		}
+
+		if ( neighboringElement > 0) {		//if we are not at the first element
+			currentElement -= 1;			//subtract each index counter by one
+			neighboringElement -= 1;
+		}else {	//otherwise, we have looped thru the entire array once
+			passCount += 1;		//add one to count
+			currentElement = data.size() - 1;	//set index counters to original value so we can loop thru again
+			neighboringElement = data.size() - 2;
+		}
+
+	} 
+
+	return data;
+	  
   }
 
 
   public static void main( String [] args )
   {
 
-    /*===============for VOID methods=============
       ArrayList glen = new ArrayList<Integer>();
       glen.add(7);
       glen.add(1);
       glen.add(5);
       glen.add(12);
       glen.add(3);
-      System.out.println( "ArrayList glen before sorting:\n" + glen );
+	  //ArrayList VOID sort method
+	  System.out.println("=====TESTING sortV======\n");
+	
+      System.out.println( "ArrayList glen before sorting:\n" + glen + "\n");
       bubbleSortV(glen);
-      System.out.println( "ArrayList glen after sorting:\n" + glen );
+      System.out.println( "ArrayList glen after sorting:\n" + glen  + "\n");
 
       ArrayList coco = populate( 10, 1, 1000 );
-      System.out.println( "ArrayList coco before sorting:\n" + coco );
+      System.out.println( "ArrayList coco before sorting:\n" + coco + "\n");
       bubbleSortV(coco);
-      System.out.println( "ArrayList coco after sorting:\n" + coco );
-      ============================================*/
+      System.out.println( "ArrayList coco after sorting:\n" + coco + "\n");
 
-    /*==========for AL-returning methods==========
-    	ArrayList glen = new ArrayList<Integer>();
-      glen.add(7);
-      glen.add(1);
-      glen.add(5);
-      glen.add(12);
-      glen.add(3);
-      System.out.println( "ArrayList glen before sorting:\n" + glen );
-      ArrayList glenSorted = bubbleSort( glen );
-      System.out.println( "sorted version of ArrayList glen:\n" 
-      + glenSorted );
-      System.out.println( "ArrayList glen after sorting:\n" + glen );
+	  //ArrayList return sort method
+	  System.out.println("\n======TESTING sortReturn=====\n");
+      ArrayList meme = new ArrayList<Integer>();
+      meme.add(7);
+      meme.add(1);
+      meme.add(5);
+      meme.add(12);
+      meme.add(3);
+      System.out.println( "ArrayList meme before sorting:\n" + meme + "\n");
+      ArrayList memeSorted = bubbleSort( meme );
+      System.out.println( "sorted version of ArrayList meme:\n" 
+      + memeSorted );
+      System.out.println( "ArrayList meme after sorting:\n" + meme + "\n");
 
-      ArrayList coco = populate( 10, 1, 1000 );
-      System.out.println( "ArrayList coco before sorting:\n" + coco );
-      ArrayList cocoSorted = bubbleSort( coco );
-      System.out.println( "sorted version of ArrayList coco:\n" 
-      + cocoSorted );
-      System.out.println( "ArrayList coco after sorting:\n" + coco );
-      System.out.println( coco );
-      ============================================*/
-
+      ArrayList bobo = populate( 10, 1, 1000 );
+      System.out.println( "ArrayList bobo before sorting:\n" + bobo + "\n");
+      ArrayList boboSorted = bubbleSort( bobo );
+      System.out.println( "sorted version of ArrayList bobo:\n" 
+      + boboSorted + "\n");
+      System.out.println( "ArrayList bobo after sorting:\n" + bobo + "\n");
+      
   }//end main
 
 }//end class BubbleSort

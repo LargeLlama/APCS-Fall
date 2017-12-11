@@ -77,7 +77,7 @@ public class OrderedArrayList
 
 			} else if (newVal.compareTo(_data.get(currentHalf)) > 0) { //if newVal is higher than the currentHalf
 				_lo = currentHalf + 1; //set _lo to half plus one
-				currentHalf = (int) (_lo + (_hi - _lo) / 2);	//sets the currentHalf to the value in between the _lo and the _hi
+				currentHalf = (int) (_lo + ((_hi - _lo) / 2));	//sets the currentHalf to the value in between the _lo and the _hi
 			}
 			else {
 				_data.add(currentHalf, newVal);	//this only happens if they are equal, so we can just slap it in that index

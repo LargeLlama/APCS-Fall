@@ -38,7 +38,30 @@ public class InsertionSort
   // postcondition: data's elements sorted in ascending order
   public static void insertionSortV( ArrayList<Comparable> data )
   {
-	
+	  if (data.size() > 1) {
+
+		  int passes = 0;	//int to keep track of passes
+
+		  while (passes <= data.size() - 1) {	//as long as passes are less
+
+			  for (int i = passes; i > 0; i--) {					//start backwards, starting from the last item of the sorted partition
+					
+				  if (data.get(i).compareTo(data.get(i-1)) < 0) {		//compare the newly added item to the item before it
+					  	
+					  Comparable temp = data.get(i-1);		//swap if it is less
+					  data.set(i-1, data.get(i));
+					  data.set(i, temp);
+					  //System.out.println(data); 
+					  //uncomment above line to see the individual swapping
+				  }
+
+			  }
+			  //System.out.println("state of data at pass number " + passes + ": " + data); 
+			  //uncomment above line to see how the state of data changes each pass
+			  passes ++;	//increment passes, as we have looped thru the sorted partition and now want to increase its size by one
+		}
+
+	  }
   }//end insertionSortV
 
 
@@ -48,13 +71,21 @@ public class InsertionSort
   public static ArrayList<Comparable>
     insertionSort( ArrayList<Comparable> input )
   {
-    /* YOUR IMPLEMENTATION HERE */
+	  ArrayList<Comparable> meme = new ArrayList<Comparable>();	//create new empty arraylist
+
+	  for (Comparable c : input) {		//copy each element of data over
+		  meme.add(c);
+	  }
+	
+	  insertionSortV(meme);	//sort it
+	  return meme;	//return it
   }//end insertionSort
 
 
   public static void main( String [] args )
   {
-    /*===============for VOID methods=============
+/*===============for VOID methods=============
+
       System.out.println("\n*** Testing sort-in-place (void) version... *** ");
       ArrayList glen = new ArrayList<Integer>();
       glen.add(7);
@@ -70,9 +101,9 @@ public class InsertionSort
       System.out.println( "\nArrayList coco before sorting:\n" + coco );
       insertionSortV(coco);
       System.out.println( "\nArrayList coco after sorting:\n" + coco );
+    
       ============================================*/
 
-    /*==========for AL-returning methods==========
       System.out.println( "*** Testing non-void version... *** " );
     	ArrayList glen = new ArrayList<Integer>();
       glen.add(7);
@@ -93,6 +124,8 @@ public class InsertionSort
       + cocoSorted );
       System.out.println( "\nArrayList coco after sorting:\n" + coco );
       System.out.println( coco );
+    /*==========for AL-returning methods==========
+
       ============================================*/
 
   }//end main

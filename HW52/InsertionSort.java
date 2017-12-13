@@ -1,3 +1,9 @@
+//WOOOOOOOOoobin Peco
+//APCS pd1
+//HW52 - yeah sure
+//2017-12-12
+//yeah
+
 /***************************************
  *  class InsertionSort -- implements InsertionSort algorithm
  ***************************************/

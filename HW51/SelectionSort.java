@@ -1,3 +1,9 @@
+//WOOOOOOBin Peco
+//APCS pd1
+//HW51 select sort
+//2017-12-11
+//yeah
+
 /***************************************
  * class SelectionSort -- implements SelectionSort algorithm
  ***************************************/

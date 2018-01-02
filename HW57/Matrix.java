@@ -1,3 +1,9 @@
+//WOOOOOOOOOOOoobin Peco
+//apcs pd.1
+//HW57
+//2017-12-20
+//im so sorry im a mess
+
 /***
  * class Matrix -- models a square matrix
  *
